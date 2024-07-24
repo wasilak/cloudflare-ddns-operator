@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- dnsentry_v1_dnsentry.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

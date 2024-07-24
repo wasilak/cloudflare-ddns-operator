@@ -1,0 +1,9 @@
+apiVersion: dnsentry.mindthebig.rocks/v1
+kind: Dnsentry
+metadata:
+  labels:
+    app.kubernetes.io/name: cloudflare-ddns-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: dnsentry-sample
+spec:
+  # TODO(user): Add fields here

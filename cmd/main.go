@@ -19,6 +19,7 @@ package main
 import (
 	"crypto/tls"
 	"flag"
+	"fmt"
 	"os"
 
 	// Import all Kubernetes client auth plugins (e.g. Azure, GCP, OIDC, etc.)
@@ -70,13 +71,20 @@ func main() {
 		"If set, the metrics endpoint is served securely via HTTPS. Use --metrics-secure=false to use HTTP instead.")
 	flag.BoolVar(&enableHTTP2, "enable-http2", false,
 		"If set, HTTP/2 will be enabled for the metrics and webhook servers")
+	flag.StringVar(&controller.OperatorName, "operator-name", "cloudflare-ddns", "Operator name")
+	flag.StringVar(&controller.DockerImageRunner, "docker-image-runner", "ghcr.io/wasilak/cloudflare-ddns:0.1.6", "Image name for docker runner")
+
 	opts := zap.Options{
-		Development: true,
+		Development: false,
 	}
 	opts.BindFlags(flag.CommandLine)
 	flag.Parse()
 
 	ctrl.SetLogger(zap.New(zap.UseFlagOptions(&opts)))
+
+	controller.CronJobName = fmt.Sprintf("%s-cronjob", controller.OperatorName)
+	controller.BatchJobName = fmt.Sprintf("%s-cronjob", controller.OperatorName)
+	controller.FinalizerName = fmt.Sprintf("%s-finalizer", controller.OperatorName)
 
 	// if the enable-http2 flag is false (the default), http/2 should be disabled
 	// due to its vulnerabilities. More specifically, disabling http/2 will
@@ -155,11 +163,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controller.DnsentryReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
+	if err = (&controller.DnsEntryReconciler{
+		Client:   mgr.GetClient(),
+		Scheme:   mgr.GetScheme(),
+		Recorder: mgr.GetEventRecorderFor("cloudflare-ddns-operator"),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "Dnsentry")
+		setupLog.Error(err, "unable to create controller", "controller", "DnsEntry")
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder

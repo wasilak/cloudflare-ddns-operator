@@ -7,17 +7,17 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
   name: dnsentry-viewer-role
 rules:
-- apiGroups:
-  - dnsentry.mindthebig.rocks
-  resources:
-  - dnsentries
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - dnsentry.mindthebig.rocks
-  resources:
-  - dnsentries/status
-  verbs:
-  - get
+  - apiGroups:
+      - cloudflare-ddns.mindthebig.rocks
+    resources:
+      - dnsentries
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - cloudflare-ddns.mindthebig.rocks
+    resources:
+      - dnsentries/status
+    verbs:
+      - get

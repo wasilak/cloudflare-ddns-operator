@@ -7,21 +7,21 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
   name: dnsentry-editor-role
 rules:
-- apiGroups:
-  - dnsentry.mindthebig.rocks
-  resources:
-  - dnsentries
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - dnsentry.mindthebig.rocks
-  resources:
-  - dnsentries/status
-  verbs:
-  - get
+  - apiGroups:
+      - cloudflare-ddns.mindthebig.rocks
+    resources:
+      - dnsentries
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - cloudflare-ddns.mindthebig.rocks
+    resources:
+      - dnsentries/status
+    verbs:
+      - get

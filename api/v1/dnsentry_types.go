@@ -23,42 +23,56 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// DnsentrySpec defines the desired state of Dnsentry
-type DnsentrySpec struct {
+// DnsEntryItemSpec defines the desired state of DnsEntry
+type DnsEntryItemSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Dnsentry. Edit dnsentry_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Name            string `json:"name"`
+	ZoneName        string `json:"zone_name"`
+	Type            string `json:"type"`
+	TTL             int    `json:"ttl"`
+	Proxied         bool   `json:"proxied"`
+	KeepAfterDelete bool   `json:"keep_after_delete"`
 }
 
-// DnsentryStatus defines the observed state of Dnsentry
-type DnsentryStatus struct {
+type DnsEntrySpec struct {
+	Items               []DnsEntryItemSpec `json:"items"`
+	Cron                string             `json:"cron"`
+	TriggerRecordDelete bool               `json:"trigger_record_delete"`
+}
+
+// DnsEntryStatus defines the observed state of DnsEntry
+type DnsEntryStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:printcolumn:name="Age",type="date",JSONPath=".metadata.creationTimestamp"
+// +kubebuilder:printcolumn:name="Cron",type=string,JSONPath=`.spec.cron`
+// +kubebuilder:printcolumn:name="TriggerRecordDelete",type=boolean,JSONPath=`.spec.trigger_record_delete`
+// +kubebuilder:printcolumn:name="Records",type=string,JSONPath=`.spec.items..name`
 
-// Dnsentry is the Schema for the dnsentries API
-type Dnsentry struct {
+// DnsEntry is the Schema for the dnsentries API
+type DnsEntry struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   DnsentrySpec   `json:"spec,omitempty"`
-	Status DnsentryStatus `json:"status,omitempty"`
+	Spec   DnsEntrySpec   `json:"spec,omitempty"`
+	Status DnsEntryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// DnsentryList contains a list of Dnsentry
-type DnsentryList struct {
+// DnsEntryList contains a list of DnsEntry
+type DnsEntryList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Dnsentry `json:"items"`
+	Items           []DnsEntry `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Dnsentry{}, &DnsentryList{})
+	SchemeBuilder.Register(&DnsEntry{}, &DnsEntryList{})
 }

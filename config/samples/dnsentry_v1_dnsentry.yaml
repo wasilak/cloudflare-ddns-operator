@@ -1,9 +1,24 @@
-apiVersion: dnsentry.mindthebig.rocks/v1
-kind: Dnsentry
+apiVersion: cloudflare-ddns.mindthebig.rocks/v1
+kind: DnsEntry
 metadata:
   labels:
     app.kubernetes.io/name: cloudflare-ddns-operator
     app.kubernetes.io/managed-by: kustomize
   name: dnsentry-sample
 spec:
-  # TODO(user): Add fields here
+  cron: "*/1 * * * *"
+  trigger_record_delete: false
+  items:
+    - name: test-a-1.mindthebig.rocks
+      proxied: true
+      ttl: 120
+      type: A
+      zone_name: mindthebig.rocks
+      keep_after_delete: false
+
+    - name: test-a-2.mindthebig.rocks
+      proxied: false
+      ttl: 120
+      type: A
+      zone_name: mindthebig.rocks
+      keep_after_delete: false

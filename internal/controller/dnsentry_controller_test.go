@@ -30,7 +30,7 @@ import (
 	dnsentryv1 "github.com/wasilak/cloudflare-ddns-operator/api/v1"
 )
 
-var _ = Describe("Dnsentry Controller", func() {
+var _ = Describe("DnsEntry Controller", func() {
 	Context("When reconciling a resource", func() {
 		const resourceName = "test-resource"
 
@@ -40,13 +40,13 @@ var _ = Describe("Dnsentry Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		dnsentry := &dnsentryv1.Dnsentry{}
+		dnsentry := &dnsentryv1.DnsEntry{}
 
 		BeforeEach(func() {
-			By("creating the custom resource for the Kind Dnsentry")
+			By("creating the custom resource for the Kind DnsEntry")
 			err := k8sClient.Get(ctx, typeNamespacedName, dnsentry)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &dnsentryv1.Dnsentry{
+				resource := &dnsentryv1.DnsEntry{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -59,16 +59,16 @@ var _ = Describe("Dnsentry Controller", func() {
 
 		AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &dnsentryv1.Dnsentry{}
+			resource := &dnsentryv1.DnsEntry{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			Expect(err).NotTo(HaveOccurred())
 
-			By("Cleanup the specific resource instance Dnsentry")
+			By("Cleanup the specific resource instance DnsEntry")
 			Expect(k8sClient.Delete(ctx, resource)).To(Succeed())
 		})
 		It("should successfully reconcile the resource", func() {
 			By("Reconciling the created resource")
-			controllerReconciler := &DnsentryReconciler{
+			controllerReconciler := &DnsEntryReconciler{
 				Client: k8sClient,
 				Scheme: k8sClient.Scheme(),
 			}

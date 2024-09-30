@@ -37,9 +37,8 @@ type DnsEntryItemSpec struct {
 }
 
 type DnsEntrySpec struct {
-	Items               []DnsEntryItemSpec `json:"items"`
-	Cron                string             `json:"cron"`
-	TriggerRecordDelete bool               `json:"trigger_record_delete"`
+	Items []DnsEntryItemSpec `json:"items"`
+	Cron  string             `json:"cron"`
 }
 
 // DnsEntryStatus defines the observed state of DnsEntry
@@ -52,8 +51,6 @@ type DnsEntryStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="Age",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:printcolumn:name="Cron",type=string,JSONPath=`.spec.cron`
-// +kubebuilder:printcolumn:name="TriggerRecordDelete",type=boolean,JSONPath=`.spec.trigger_record_delete`
-// +kubebuilder:printcolumn:name="Records",type=string,JSONPath=`.spec.items..name`
 
 // DnsEntry is the Schema for the dnsentries API
 type DnsEntry struct {

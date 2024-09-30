@@ -7,7 +7,6 @@ metadata:
   name: dnsentry-sample
 spec:
   cron: "*/1 * * * *"
-  trigger_record_delete: false
   items:
     - name: test-a-1.mindthebig.rocks
       proxied: true

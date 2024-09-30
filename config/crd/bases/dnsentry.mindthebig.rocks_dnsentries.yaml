@@ -65,12 +65,9 @@ spec:
                       - zone_name
                     type: object
                   type: array
-                trigger_record_delete:
-                  type: boolean
               required:
                 - cron
                 - items
-                - trigger_record_delete
               type: object
             status:
               description: DnsEntryStatus defines the observed state of DnsEntry

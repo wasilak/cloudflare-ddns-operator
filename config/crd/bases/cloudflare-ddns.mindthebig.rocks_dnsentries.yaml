@@ -21,12 +21,6 @@ spec:
     - jsonPath: .spec.cron
       name: Cron
       type: string
-    - jsonPath: .spec.trigger_record_delete
-      name: TriggerRecordDelete
-      type: boolean
-    - jsonPath: .spec.items..name
-      name: Records
-      type: string
     name: v1
     schema:
       openAPIV3Schema:
@@ -78,12 +72,9 @@ spec:
                   - zone_name
                   type: object
                 type: array
-              trigger_record_delete:
-                type: boolean
             required:
             - cron
             - items
-            - trigger_record_delete
             type: object
           status:
             description: DnsEntryStatus defines the observed state of DnsEntry

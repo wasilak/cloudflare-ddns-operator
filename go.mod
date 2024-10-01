@@ -2,7 +2,7 @@ module github.com/wasilak/cloudflare-ddns-operator
 
 go 1.22.4
 
-toolchain go1.23.1
+toolchain go1.23.2
 
 require (
 	github.com/cloudflare/cloudflare-go v0.106.0

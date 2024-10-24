@@ -5,7 +5,7 @@ go 1.22.4
 toolchain go1.23.2
 
 require (
-	github.com/cloudflare/cloudflare-go v0.107.0
+	github.com/cloudflare/cloudflare-go v0.108.0
 	github.com/cloudflare/cloudflare-go/v3 v3.1.0
 	github.com/onsi/ginkgo/v2 v2.20.2
 	github.com/onsi/gomega v1.34.2

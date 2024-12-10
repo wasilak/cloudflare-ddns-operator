@@ -8,7 +8,7 @@ require (
 	github.com/cloudflare/cloudflare-go v0.111.0
 	github.com/cloudflare/cloudflare-go/v3 v3.1.0
 	github.com/onsi/ginkgo/v2 v2.22.0
-	github.com/onsi/gomega v1.36.0
+	github.com/onsi/gomega v1.36.1
 	k8s.io/api v0.31.3
 	k8s.io/apimachinery v0.31.3
 	k8s.io/client-go v0.31.3

@@ -15,12 +15,11 @@ func getRecordsFromCRD(ctx context.Context, crdInstance *dnsentriesv1.DnsEntry) 
 	for _, v := range crdInstance.Spec.Items {
 
 		recordTmp := cloudflare.DNSRecord{
-			Name:     v.Name,
-			Content:  "127.0.0.1",
-			Proxied:  &v.Proxied,
-			TTL:      v.TTL,
-			ZoneName: v.ZoneName,
-			Type:     v.Type,
+			Name:    v.Name,
+			Content: "127.0.0.1",
+			Proxied: &v.Proxied,
+			TTL:     v.TTL,
+			Type:    v.Type,
 		}
 
 		records = append(records, recordTmp)

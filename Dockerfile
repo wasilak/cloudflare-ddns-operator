@@ -1,5 +1,5 @@
 # Build the manager binary
-FROM quay.io/wasilak/golang:1.24 AS builder
+FROM quay.io/wasilak/golang:1.26 AS builder
 ARG TARGETOS
 ARG TARGETARCH
 

@@ -1,11 +1,10 @@
 module github.com/wasilak/cloudflare-ddns-operator
 
-go 1.24.0
-
-toolchain go1.24.3
+go 1.26
 
 require (
-	github.com/cloudflare/cloudflare-go v0.115.0
+	github.com/cloudflare/cloudflare-go v0.119.0
+	github.com/cloudflare/cloudflare-go/v7 v7.13.1
 	github.com/onsi/ginkgo/v2 v2.23.4
 	github.com/onsi/gomega v1.36.3
 	k8s.io/api v0.33.0
